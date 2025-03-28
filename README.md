@@ -25,7 +25,7 @@ Quiz Quest RPG is an interactive web-based game where students answer subject-re
 ```sh
 cd backend
 python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
@@ -37,12 +37,6 @@ npm install
 npm run dev
 ```
 
-### Environment Variables
-Create a `.env` file in the `backend/` directory:
-```
-OPENAI_API_KEY=your_openai_api_key
-DATABASE_URL=postgresql://user:password@localhost/dbname
-```
 
 ## Contributing
 1. Fork the repository.
