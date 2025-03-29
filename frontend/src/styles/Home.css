@@ -1,58 +1,200 @@
+/* General Page Styling */
 .home-container {
-  text-align: center;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
+    text-align: center;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 30px;
+    height: 100vh; /* Fix container to viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevents scrolling */
+}
+/* Headings */
+h1 {
+    font-size: 3rem; /* Reduced from 3.5rem */
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 15px; /* Reduced margin */
+    letter-spacing: 1.5px;
+    animation: fadeIn 1s ease-in-out;
 }
 
-.title {
-  font-size: 3rem;
-  font-weight: bold;
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+h2 {
+    font-size: 1.8rem; /* Reduced from 2.2rem */
+    font-weight: 600;
+    margin-bottom: 20px; /* Reduced margin */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+/* Subject Selector */
+.subject-selector {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.subject-container h3 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+.subject-selector label {
+    margin-bottom: 10px;
+    font-size: 1.2rem; /* Slightly smaller */
+    font-weight: bold;
 }
 
-select {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: none;
+.subject-selector select {
+    padding: 12px; /* Slightly smaller */
+    font-size: 1.2rem; /* Reduced from 1.4rem */
+    border-radius: 10px;
+    border: none;
+    background: white;
+    color: #333;
+    width: 220px; /* Reduced width */
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
 }
 
-.generate-btn {
-  margin-top: 15px;
-  padding: 12px 20px;
-  font-size: 1rem;
-  background-color: #0057b8;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+.subject-selector select:focus {
+    outline: none;
+    border: 2px solid #4e9eff;
 }
 
-.generate-btn:hover {
-  background-color: #003d82;
+/* Buttons */
+.generate-btn, .submit-btn {
+    background: linear-gradient(90deg, #ff6f61, #ff9966);
+    color: white;
+    padding: 12px 24px; /* Slightly smaller */
+    font-size: 1.1rem; /* Reduced from 1.3rem */
+    border: none;
+    border-radius: 8px; /* Reduced from 10px */
+    cursor: pointer;
+    margin: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
 }
 
-.question {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  font-style: italic;
-  font-weight: bold;
-  color: #fff;
+.generate-btn:hover, .submit-btn:hover {
+    background: linear-gradient(90deg, #ff9966, #ff6f61);
+    transform: scale(1.05);
+}
+
+.generate-btn:active, .submit-btn:active {
+    transform: scale(0.95);
+}
+
+/* Question Box - Fixed Size */
+.question-box {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 55%;
+    max-width: 600px;
+    min-height: 130px; /* Ensuring a constant size */
+    margin: 10px auto;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease-in-out;
+}
+.question-box:hover {
+    transform: scale(1.02);
+}
+
+/* Options */
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1rem; /* Slightly smaller */
+    cursor: pointer;
+    padding: 10px;
+    width: 75%;
+    text-align: center;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease-in-out, background 0.3s;
+}
+
+.option-label:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Feedback Message */
+.feedback {
+    font-size: 1.4rem; /* Slightly smaller */
+    margin-top: 12px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+}
+
+/* Correct Answer */
+.feedback.correct {
+    color: #28a745;
+    background: rgba(40, 167, 69, 0.3);
+}
+
+/* Incorrect Answer */
+.feedback.incorrect {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.3);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.4rem; /* Reduced from 2.8rem */
+    }
+    h2 {
+        font-size: 1.6rem; /* Reduced from 1.8rem */
+    }
+    .question-box {
+        width: 85%;
+        padding: 18px; /* Slightly smaller */
+    }
+    .generate-btn, .submit-btn {
+        font-size: 1rem; /* Slightly smaller */
+        padding: 12px 20px;
+    }
+    .option-label {
+        width: 85%;
+        font-size: 1rem; /* Slightly smaller */
+    }
+}
+
+/* Remove Extra Margins */
+h1, h2 {
+    margin: 10px 0; /* Reduce extra spacing */
+}
+
+/* Prevent Scroll in Small Screens */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 10px;
+        height: 100vh;
+        overflow: hidden;
+    }
 }

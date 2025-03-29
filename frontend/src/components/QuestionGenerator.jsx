@@ -1,51 +1,55 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-const API_URL = "http://localhost:8000"; // Ensure this matches your FastAPI backend
+const QuestionGenerator = ({ selectedSubject }) => {
+    const [questionData, setQuestionData] = useState(null);
+    const [selectedOption, setSelectedOption] = useState("");
+    const [feedback, setFeedback] = useState("");
 
-const QuestionGenerator = () => {
-    const [subject, setSubject] = useState("math");  // Default subject
-    const [question, setQuestion] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-
-    // Function to fetch a question based on the selected subject
     const fetchQuestion = async () => {
-        setLoading(true);
-        setError("");
         try {
-            const response = await fetch(`${API_URL}/generate_question?subject=${subject}`);
-            if (!response.ok) throw new Error("Failed to fetch question");
-
-            const data = await response.json();
-            setQuestion(data.question || "No question available for this subject.");
-        } catch (err) {
-            setError("Failed to load question. Check backend.");
-            setQuestion("");
+            const response = await axios.get(`http://localhost:8000/generate-question?subject=${selectedSubject}`);
+            setQuestionData(response.data);
+            setSelectedOption("");  // Reset selected option
+            setFeedback("");  // Clear feedback
+        } catch (error) {
+            console.error("Error fetching question:", error);
         }
-        setLoading(false);
+    };
+
+    const handleSubmit = () => {
+        if (selectedOption === questionData.answer) {
+            setFeedback("✅ Correct! Well done.");
+        } else {
+            setFeedback(`❌ Incorrect. The correct answer is: ${questionData.answer}`);
+        }
     };
 
     return (
-        <div className="container">
-            <h2>Select a Subject</h2>
+        <div className="question-container">
+            <button onClick={fetchQuestion} className="generate-btn">Generate Question</button>
 
-            {/* Subject Dropdown */}
-            <select className="dropdown" value={subject} onChange={(e) => setSubject(e.target.value)}>
-                <option value="math">Math</option>
-                <option value="history">History</option>
-                <option value="science">Science</option>
-            </select>
-
-            {/* Button to Fetch Question */}
-            <button className="btn" onClick={fetchQuestion} disabled={loading}>
-                {loading ? "Loading..." : "Generate Question"}
-            </button>
-
-            {/* Display Question */}
-            {question && <p className="question">📖 {question}</p>}
-            
-            {/* Display Error */}
-            {error && <p className="error">{error}</p>}
+            {questionData && (
+                <div className="question-box">
+                    <h2>{questionData.question}</h2>
+                    <div className="options">
+                        {questionData.options.map((option, index) => (
+                            <label key={index} className="option-label">
+                                <input
+                                    type="radio"
+                                    name="quiz"
+                                    value={option}
+                                    checked={selectedOption === option}
+                                    onChange={() => setSelectedOption(option)}
+                                />
+                                {option}
+                            </label>
+                        ))}
+                    </div>
+                    <button onClick={handleSubmit} className="submit-btn">Submit Answer</button>
+                    {feedback && <p className="feedback">{feedback}</p>}
+                </div>
+            )}
         </div>
     );
 };
