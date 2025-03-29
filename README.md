@@ -1,10 +1,10 @@
 # Quiz Quest RPG
 
 ## Overview
-Quiz Quest RPG is an interactive web-based game where students answer subject-related questions to progress through a fantasy storyline. The game dynamically generates questions using GPT-4 and provides an engaging way for students to reinforce their learning.
+Quiz Quest RPG is an interactive web-based game where students answer subject-related questions to progress. The game dynamically generates questions using GPT-4 and provides an engaging way for students to reinforce their learning.
 
 ## Features
-- **Fantasy RPG Theme:** Players progress through a story by answering questions.
+- **Fantasy RPG Theme:** Players progress by answering questions.
 - **Dynamic Question Generation:** Uses GPT-4 to create subject-based questions.
 - **React Frontend:** Interactive UI for an engaging user experience.
 - **FastAPI Backend:** Handles user progress and communicates with GPT-4.
@@ -19,7 +19,6 @@ Quiz Quest RPG is an interactive web-based game where students answer subject-re
 ### Prerequisites
 - Node.js & npm installed
 - Python 3.8+ installed
-- PostgreSQL database setup
 
 ### Backend Setup
 ```sh
